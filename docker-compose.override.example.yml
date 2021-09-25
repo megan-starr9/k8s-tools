@@ -9,10 +9,10 @@ services:
     volumes:
       - ./mongodb/data:/data/db
 
-  techofmany:
+  k8s-techofmany:
     extends:
       file: ../k8s-techofmany/docker-compose.yml
-      service: techofmany
+      service: k8s-techofmany
   ratemygm:
     extends:
       file: ../k8s-ratemygm/docker-compose.yml
