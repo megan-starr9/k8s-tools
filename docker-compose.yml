@@ -1,0 +1,22 @@
+version: '2.0'
+services:
+  k8s-nginx:
+    build:
+      context: ./nginx
+    image: ${CONTAINER_REGISTRY}/k8s-nginx:${VERSION}
+    restart: on-failure
+    ports:
+      - 80:80
+  k8s-mongodb:
+    build:
+      context: ./mongodb
+    image: ${CONTAINER_REGISTRY}/k8s-mongodb:${VERSION}
+    environment:
+      MONGO_INITDB_DATABASE: techofmany
+    ports:
+      - 27017:27017
+    volumes:
+      - database:/data/db
+
+volumes:
+  database:

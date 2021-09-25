@@ -1,0 +1,27 @@
+version: '2.0'
+services:
+  k8s-nginx:
+    env_file:
+      .env
+  k8s-mongodb:
+    env_file:
+      .env
+    volumes:
+      - ./mongodb/data:/data/db
+
+  techofmany:
+    extends:
+      file: ../k8s-techofmany/docker-compose.yml
+      service: techofmany
+  ratemygm:
+    extends:
+      file: ../k8s-ratemygm/docker-compose.yml
+      service: ratemygm
+    env_file:
+      .env
+  portfolio:
+    extends:
+      file: ../k8s-portfolio/docker-compose.yml
+      service: portfolio
+    env_file:
+      .env
