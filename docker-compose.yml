@@ -5,14 +5,16 @@ services:
       context: ./nginx
     image: ${CONTAINER_REGISTRY}/k8s-nginx:${VERSION}
     restart: on-failure
+    depends_on:
+      - k8s-techofmany
+      - k8s-portfolio
+      - k8s-ratemygm
     ports:
       - 80:80
   k8s-mongodb:
     build:
       context: ./mongodb
     image: ${CONTAINER_REGISTRY}/k8s-mongodb:${VERSION}
-    environment:
-      MONGO_INITDB_DATABASE: techofmany
     ports:
       - 27017:27017
     volumes:
