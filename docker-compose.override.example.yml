@@ -1,4 +1,4 @@
-version: '2.0'
+version: '3.8'
 services:
   k8s-nginx:
     env_file:
@@ -13,6 +13,8 @@ services:
     extends:
       file: ../k8s-techofmany/docker-compose.yml
       service: k8s-techofmany
+    env_file:
+      ../k8s-techofmany/.env.local
   ratemygm:
     extends:
       file: ../k8s-ratemygm/docker-compose.yml
