@@ -3,27 +3,42 @@ services:
   k8s-nginx:
     env_file:
       .env
+    depends_on:
+      - k8s-techofmany
+      - k8s-techofmany-admin
+      - k8s-portfolio
+      - k8s-ratemygm
   k8s-mongodb:
     env_file:
       .env
     volumes:
       - ./mongodb/data:/data/db
 
+  techofmany-base:
+    extends:
+      file: ../k8s-techofmany/docker-compose.yml
+      service: techofmany-base
   k8s-techofmany:
     extends:
       file: ../k8s-techofmany/docker-compose.yml
       service: k8s-techofmany
     env_file:
       ../k8s-techofmany/.env.local
-  ratemygm:
+  k8s-techofmany-admin:
+    extends:
+      file: ../k8s-techofmany/docker-compose.yml
+      service: k8s-techofmany-admin
+    env_file:
+      ../k8s-techofmany/.env.local
+  k8s-ratemygm:
     extends:
       file: ../k8s-ratemygm/docker-compose.yml
-      service: ratemygm
+      service: k8s-ratemygm
     env_file:
       .env
-  portfolio:
+  k8s-portfolio:
     extends:
       file: ../k8s-portfolio/docker-compose.yml
-      service: portfolio
+      service: k8s-portfolio
     env_file:
       .env
